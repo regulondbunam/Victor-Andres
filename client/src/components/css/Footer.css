@@ -1,0 +1,51 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spacer {
+  background-color: #305f7b;
+  padding-top: 5px;
+  width: 100%;
+}
+
+.logos {
+  display: block;
+}
+
+.separator {
+  float: left;
+  border-right-style: solid;
+  border-right-width: thin;
+  border-right-color: #7f7f7f;
+}
+
+.logo_1 {
+  padding: 0px 85px 50px 0px;
+  background: url(../assets/unam_logo.gif) no-repeat center;
+}
+
+.logo_2 {
+  padding: 0px 144px 50px 15px;
+  background: url(../assets/ccg_logo.gif) no-repeat center;
+}
+
+.logo_3 {
+  padding: 0px 72px 50px 15px;
+  background: url(../assets/nih_logo.gif) no-repeat center;
+}
+
+.logo_4 {
+  padding: 0px 72px 50px 15px;
+  background: url(../assets/conacyt_logo.gif) no-repeat center;
+}
+
+.logos a.links {
+  padding-left: 30px;
+  float: right;
+  font-size: 16px;
+  font-family: "Arial";
+  color: #666666;
+  text-decoration: none;
+}

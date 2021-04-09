@@ -1,0 +1,34 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.category {
+  color: #32617d;
+  font-weight: 900;
+
+  margin: 5px 0 5px 100px;
+}
+
+.services {
+  color: #3d779b;
+  font-weight: 600;
+  margin: 5px 0 5px 110px;
+}
+
+.container-link {
+  margin: 5px 0 5px 120px;
+}
+
+.link {
+  color: #3d779b;
+  text-decoration: none;
+}
+
+.link:hover {
+  background-color: #32617d;
+  color: #fff;
+  border-radius: 3px;
+  padding: 1px 10px 1px 2px;
+}

@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+}
+
+.menu {
+  width: 30%;
+  float: left;
+  padding-top: 20px;
+}
+.container-info {
+  width: 70%;
+  float: right;
+}
+
+h2 {
+  color: #32617d;
+}
