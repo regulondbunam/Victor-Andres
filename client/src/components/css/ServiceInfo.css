@@ -15,3 +15,40 @@
 h2 {
   color: #32617d;
 }
+
+.categorys {
+  color: #32617d;
+  margin-left: 10px;
+  margin-right: 40px;
+}
+
+.container-service-category {
+  color: #32617d;
+  margin-left: 20px;
+}
+
+.description-service-category {
+  margin-left: 10px;
+  margin-right: 40px;
+}
+
+.container-service {
+  margin-left: 10px;
+  margin-right: 40px;
+}
+
+a {
+  color: #32617d;
+  font-weight: 600;
+}
+
+a:hover {
+  background-color: #32617d;
+  color: #fff;
+  border-radius: 3px;
+  padding: 2px;
+}
+
+hr.line {
+  border-top: 1px solid #e0e0e0;
+}
