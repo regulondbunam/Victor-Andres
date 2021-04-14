@@ -27,9 +27,14 @@ const Navbar = () => {
               <Link to="/">Help</Link>
             </li>
             <li className="active_a">
-              <Link to="/" className="active_b">
+              <a
+                rel="nofollow noopener noreferrer"
+                href="http://localhost:4001/graphql/?query=%7B%0A%20%20getAllGenes%7B%0A%20%20%20%20data%7B%0A%20%20%20%20%20%20gene%7B%0A%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20products%7B%0A%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D"
+                target="_blank"
+                className="active_b"
+              >
                 Documentation
-              </Link>
+              </a>
             </li>
           </ul>
         </div>

@@ -24,6 +24,19 @@ const Footer = () => {
           How to cite
         </Link>
       </div>
+      <div id="script">
+        <form action="">
+          <strong>©1998-2021</strong>, CCG/UNAM All Rights Reserved. RegulonDB
+          is free for academic/noncommercial use. <br /> RegulonDB 10.8,
+          10/12/2020. Our curation knowledge is currently mapped to the GenBank
+          Reference Sequence for E. coli K12. <br />
+          Version NC_000913.3 GI:556503834. Send your comments to the RegulonDB
+          Team
+          <Link className="link-form">
+            <strong> HERE</strong>
+          </Link>
+        </form>
+      </div>
     </div>
   );
 };

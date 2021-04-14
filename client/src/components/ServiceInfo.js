@@ -1,77 +1,110 @@
 import React from "react";
 import "./css/ServiceInfo.css";
-import MenuAside from "./MenuAside";
 import { Link } from "react-router-dom";
+import { gql, useQuery } from "@apollo/client";
+import md2json from "md-2-json";
+
+const GET_DESCRIPTION = gql`
+  {
+    __type(name: "Query") {
+      fields {
+        description
+      }
+    }
+  }
+`;
 
 const ServiceInfo = () => {
+  const { loading, error, data } = useQuery(GET_DESCRIPTION);
+  if (loading) return <p>Cargando...</p>;
+  if (error) {
+    return <p>Error</p>;
+  }
+  let description = data.__type.fields;
+
+  let arreglo = [];
+
+  for (let i = 0; i < description.length; i++) {
+    let descrip = description[i].description.replace(/#+/g, "#");
+
+    let json = md2json.parse(descrip);
+
+    arreglo.push(json);
+  }
+
+  let nuevoObjeto = {};
+  arreglo.forEach((x) => {
+    if (!nuevoObjeto.hasOwnProperty(clean(x.Type.raw))) {
+      nuevoObjeto[clean(x.Type.raw)] = {};
+    }
+
+    if (
+      !nuevoObjeto[clean(x.Type.raw)].hasOwnProperty([clean(x.Service.raw)])
+    ) {
+      nuevoObjeto[clean(x.Type.raw)][clean(x.Service.raw)] = [];
+    }
+
+    nuevoObjeto[clean(x.Type.raw)][clean(x.Service.raw)].push({
+      Nombre: clean(x.Name.raw),
+      Descripcion: clean(x.Description.raw),
+    });
+  });
+  console.log(nuevoObjeto);
+  let i = 0;
   return (
-    <div className="container">
-      <div className="menu">
-        <MenuAside></MenuAside>
-      </div>
+    <div>
       <div className="container-info">
         <h2>RegulonDB GraphQL Web Services</h2>
-        <h3 className="categorys">Data</h3>
-        <div className="container-service-category">
-          <div className="container-service-des"></div>
-          <h4 className="service-category">Gene</h4>
-          <p className="description-service-category">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
-            cum sint nesciunt pariatur voluptatibus laborum maxime, quibusdam
-            assumenda, perspiciatis laudantium ad expedita? Quasi expedita
-            pariatur voluptates velit, porro et qui?
-          </p>
-          <div className="container-service">
-            <Link to="/" className="service">
-              getGenesBy
-            </Link>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat
-              sit eaque ex inventore explicabo, quas.
-            </p>
-            <Link to="/" className="service">
-              getAllGenes
-            </Link>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure,
-              voluptatum accusantium harum nulla laboriosam, enim ad, quod
-              laudantium natus.
-            </p>
-            <hr className="line" />
-          </div>
-        </div>
-        <div className="container-service-category">
-          <h4 className="service-category">Operon</h4>
-          <p className="description-service-category">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Blanditiis, ab quasi in repudiandae excepturi voluptatibus quisquam
-            sequi autem! Voluptatum eius perferendis similique soluta odio
-            laboriosam temporibus nulla corrupti blanditiis autem!
-          </p>
-          <div className="container-service">
-            <Link to="/" className="service">
-              getOperonBy
-            </Link>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
-              magni. Explicabo accusantium blanditiis earum.
-            </p>
-            <Link to="/" className="service">
-              getAllOperon
-            </Link>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure,
-              voluptatum accusantium harum nulla laboriosam, enim ad, quod
-              laudantium natus.
-            </p>
-            <hr className="line" />
-          </div>
-        </div>
 
-        <h3 className="categorys">Tools</h3>
+        {Object.keys(nuevoObjeto).map((category) => (
+          <div key={i++} id={category}>
+            <h3 className="categorys">{category}</h3>
+            {Object.keys(nuevoObjeto[category]).map((service) => (
+              <div
+                key={i++}
+                className="container-service-category"
+                id={service}
+              >
+                <div className="container-service-des"></div>
+                <h4 className="service-category">{service}</h4>
+                <p className="description-service-category">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Sapiente cum sint nesciunt pariatur voluptatibus laborum
+                  maxime, quibusdam assumenda, perspiciatis laudantium ad
+                  expedita? Quasi expedita pariatur voluptates velit, porro et
+                  qui?
+                </p>
+                {nuevoObjeto[category][service].map((ObjectService) => (
+                  <div
+                    key={i++}
+                    className="container-service"
+                    id={ObjectService.Nombre}
+                  >
+                    <Link
+                      to={{
+                        pathname: ObjectService.Nombre,
+                        state: { Object: ObjectService },
+                      }}
+                      className="service"
+                    >
+                      {ObjectService.Nombre}
+                    </Link>
+                    <p>{ObjectService.Descripcion}</p>
+                  </div>
+                ))}
+                <hr className="line" />
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );
 };
+
+function clean(str) {
+  var str2 = str.replace(/\n|\r/g, "");
+  return str2;
+}
 
 export default ServiceInfo;

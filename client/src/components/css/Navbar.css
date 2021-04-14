@@ -3,6 +3,11 @@
   margin: 0px auto;
 }
 
+#navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
 #logo {
   margin: 35px auto 25px auto;
   min-width: 1024px;

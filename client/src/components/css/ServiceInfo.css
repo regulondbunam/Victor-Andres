@@ -1,17 +1,3 @@
-.container {
-  width: 100%;
-}
-
-.menu {
-  width: 30%;
-  float: left;
-  padding-top: 20px;
-}
-.container-info {
-  width: 70%;
-  float: right;
-}
-
 h2 {
   color: #32617d;
 }
@@ -22,9 +8,20 @@ h2 {
   margin-right: 40px;
 }
 
+.description-category {
+  margin-left: 20px;
+  margin-right: 40px;
+  color: #32617d;
+}
+
 .container-service-category {
   color: #32617d;
   margin-left: 20px;
+}
+
+.service-category {
+  color: #32617d;
+  font-weight: 600;
 }
 
 .description-service-category {
@@ -37,17 +34,17 @@ h2 {
   margin-right: 40px;
 }
 
-a {
+.service {
   color: #32617d;
   font-weight: 600;
 }
 
-a:hover {
+/* .service:hover {
   background-color: #32617d;
   color: #fff;
   border-radius: 3px;
   padding: 2px;
-}
+} */
 
 hr.line {
   border-top: 1px solid #e0e0e0;

@@ -1,6 +1,7 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
+import { Link as Smooth } from "react-scroll";
 import md2json from "md-2-json";
 
 import "./css/MenuAside.css";
@@ -55,24 +56,54 @@ const MenuAside = () => {
       clean(x.Name.raw)
     );
   });
-  console.log(nuevoObjeto);
+  //console.log(nuevoObjeto);
   let i = 0;
 
   return (
-    <div>
+    <div className="side-menu">
       {Object.keys(nuevoObjeto).map((category) => (
         <div key={i++}>
           <ul>
-            <li className="category"> {category}</li>
+            {/* <li className="category"> {category}</li> */}
+            <Smooth
+              className="category"
+              activeClass="active"
+              to={category}
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
+            >
+              {category}
+            </Smooth>
             {Object.keys(nuevoObjeto[category]).map((service) => (
               <div key={i++}>
                 <ul>
-                  <li className="services"> {service}</li>
+                  {/* <li className="services"> {service}</li> */}
+                  <Smooth
+                    className="services"
+                    activeClass="active"
+                    to={service}
+                    spy={true}
+                    smooth={true}
+                    offset={-70}
+                    duration={500}
+                  >
+                    {service}
+                  </Smooth>
                   {nuevoObjeto[category][service].map((link) => (
                     <div key={i++} className="container-link">
-                      <Link className="link" to="/">
+                      <Smooth
+                        className="link"
+                        activeClass="active"
+                        to={link}
+                        spy={true}
+                        smooth={true}
+                        offset={-70}
+                        duration={500}
+                      >
                         {link}
-                      </Link>
+                      </Smooth>
                     </div>
                   ))}
                 </ul>

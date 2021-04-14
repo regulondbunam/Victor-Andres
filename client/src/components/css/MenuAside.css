@@ -1,3 +1,8 @@
+.side-menu {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
 ul {
   list-style-type: none;
   margin: 0;
@@ -7,14 +12,15 @@ ul {
 .category {
   color: #32617d;
   font-weight: 900;
-
   margin: 5px 0 5px 100px;
+  cursor: pointer;
 }
 
 .services {
   color: #3d779b;
   font-weight: 600;
   margin: 5px 0 5px 110px;
+  cursor: pointer;
 }
 
 .container-link {
@@ -24,11 +30,15 @@ ul {
 .link {
   color: #3d779b;
   text-decoration: none;
+  cursor: pointer;
 }
 
-.link:hover {
+/* .link:hover {
   background-color: #32617d;
   color: #fff;
   border-radius: 3px;
-  padding: 1px 10px 1px 2px;
+  padding: 1px 1px 1px 2px;
+} */
+.link:hover {
+  text-decoration: underline;
 }
