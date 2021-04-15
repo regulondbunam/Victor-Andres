@@ -35,7 +35,8 @@ const GET_ARGUMENTS = gql`
   }
 `;
 
-const TableArguments = () => {
+const TableArguments = (props) => {
+  //console.log(props.service);
   const { loading, error, data } = useQuery(GET_ARGUMENTS);
   if (loading) return <p>Cargando...</p>;
   if (error) {
@@ -51,19 +52,19 @@ const TableArguments = () => {
 
     for (let j = 0; j < args[i].args.length; j++) {
       if (!nuevoObjeto[args[i].name].hasOwnProperty(args[i].args[j].name)) {
-        nuevoObjeto[args[i].name][args[i].args[j].name] = {};
+        nuevoObjeto[args[i].name][args[i].args[j].name] = [];
       }
 
       //let descrip = args[i].args[j].description.replace(/\*+/g, "");
-      nuevoObjeto[args[i].name][args[i].args[j].name] = {
+      nuevoObjeto[args[i].name][args[i].args[j].name].push({
         Descripcion: args[i].args[j].description,
         ValorPorDefault: args[i].args[j].defaultValue,
         Tipo: args[i].args[j].type.name,
-      };
+      });
     }
   }
   //console.log(nuevoObjeto);
-
+  let id = 100;
   return (
     <div className="table">
       <h3>Arguments</h3>
@@ -78,17 +79,17 @@ const TableArguments = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Search</td>
-            <td>
-              usable for text search on fields defined in "Properties"
-              parameter; syntax; supports logic operators (AND,OR,NOT). eg:
-              "arad AND arac OR "biosynthesis of macromolecules""
-            </td>
-            <td>String</td>
-            <td>Something</td>
-            <td>Something</td>
-          </tr>
+          {Object.keys(nuevoObjeto[props.service]).map((args) =>
+            nuevoObjeto[props.service][args].map((service, index) => (
+              <tr key={index}>
+                <td>{args}</td>
+                <td>{service.Descripcion}</td>
+                <td>{service.Tipo}</td>
+                <td></td>
+                <td>{service.ValorPorDefault}</td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
@@ -96,3 +97,17 @@ const TableArguments = () => {
 };
 
 export default TableArguments;
+
+/***
+ * 
+ * 
+ * <tr key={Object.keys(service)}>
+              <td>Search</td>
+              <td>{console.log(service)}</td>
+              <td>{service.Tipo}</td>
+              <td>Something</td>
+              <td>{service.ValorPorDefault}</td>
+            </tr>
+ * 
+ * 
+ */

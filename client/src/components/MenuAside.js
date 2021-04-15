@@ -1,6 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Link as Smooth } from "react-scroll";
 import md2json from "md-2-json";
 
@@ -46,13 +46,6 @@ const MenuAside = (props) => {
       nuevoObjeto[clean(x.Type.raw)][clean(x.Service.raw)] = [];
     }
 
-    /* nuevoObjeto[clean(x.Type.raw)][clean(x.Service.raw)].push({
-      Nombre: clean(x.Name.raw),
-    }); */
-
-    /* nuevoObjeto[clean(x.Type.raw)][clean(x.Service.raw)].push(
-      clean(x.Name.raw)
-    ); */
     nuevoObjeto[clean(x.Type.raw)][clean(x.Service.raw)].push({
       Nombre: clean(x.Name.raw),
       Descripcion: clean(x.Description.raw),
@@ -92,15 +85,22 @@ const MenuAside = (props) => {
                   </Smooth>
                   {nuevoObjeto[category][service].map((link) => (
                     <div key={i++} className="container-link">
-                      <Link
+                      <NavLink
                         className="link"
+                        activeStyle={{
+                          color: "#fff",
+                          backgroundColor: "#376b8c",
+                          padding: "1px 4px",
+                          borderRadius: "3px",
+                        }}
+                        exact
                         to={{
-                          pathname: link,
+                          pathname: `/${link.Nombre}`,
                           state: { Object: link },
                         }}
                       >
                         {link.Nombre}
-                      </Link>
+                      </NavLink>
                     </div>
                   ))}
                 </ul>

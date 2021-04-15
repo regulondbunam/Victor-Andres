@@ -42,3 +42,7 @@ ul {
 .link:hover {
   text-decoration: underline;
 }
+
+a.link a.active {
+  color: red;
+}

@@ -26,7 +26,7 @@ const ServiceInformation = (props) => {
           <h3 className="title-service">{service.Nombre}</h3>
           <p>{service.Descripcion}</p>
           <hr />
-          <Table></Table>
+          <Table service={service.Nombre}></Table>
           <h3>Query Example</h3>
           <div className="query-code"></div>
           <h3>Parameters</h3>
