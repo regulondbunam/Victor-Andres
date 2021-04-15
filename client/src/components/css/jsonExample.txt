@@ -1,10 +1,15 @@
 {
     getAllGenes: {
-        limit:{
-            description: lorem  lorem relomladsdld,
+        limit:[{
+            description: lorem ipsum,
             default: null
             type: int
-        }
+        }]
+        page:[{
+            description: lorem ipsum,
+            default: null,
+            type: int,
+        }]
     },
 
 }
