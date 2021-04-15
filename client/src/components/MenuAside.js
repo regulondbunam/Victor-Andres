@@ -1,6 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Link as Smooth } from "react-scroll";
 import md2json from "md-2-json";
 
@@ -16,15 +16,13 @@ const GET_DATA = gql`
   }
 `;
 
-const MenuAside = () => {
+const MenuAside = (props) => {
   const { loading, error, data } = useQuery(GET_DATA);
   if (loading) return <p>Cargando...</p>;
   if (error) {
     return <p>Error</p>;
   }
   let description = data.__type.fields;
-
-  //console.log(description);
 
   let arreglo = [];
 
@@ -52,11 +50,14 @@ const MenuAside = () => {
       Nombre: clean(x.Name.raw),
     }); */
 
-    nuevoObjeto[clean(x.Type.raw)][clean(x.Service.raw)].push(
+    /* nuevoObjeto[clean(x.Type.raw)][clean(x.Service.raw)].push(
       clean(x.Name.raw)
-    );
+    ); */
+    nuevoObjeto[clean(x.Type.raw)][clean(x.Service.raw)].push({
+      Nombre: clean(x.Name.raw),
+      Descripcion: clean(x.Description.raw),
+    });
   });
-  //console.log(nuevoObjeto);
   let i = 0;
 
   return (
@@ -64,7 +65,6 @@ const MenuAside = () => {
       {Object.keys(nuevoObjeto).map((category) => (
         <div key={i++}>
           <ul>
-            {/* <li className="category"> {category}</li> */}
             <Smooth
               className="category"
               activeClass="active"
@@ -79,7 +79,6 @@ const MenuAside = () => {
             {Object.keys(nuevoObjeto[category]).map((service) => (
               <div key={i++}>
                 <ul>
-                  {/* <li className="services"> {service}</li> */}
                   <Smooth
                     className="services"
                     activeClass="active"
@@ -93,17 +92,15 @@ const MenuAside = () => {
                   </Smooth>
                   {nuevoObjeto[category][service].map((link) => (
                     <div key={i++} className="container-link">
-                      <Smooth
+                      <Link
                         className="link"
-                        activeClass="active"
-                        to={link}
-                        spy={true}
-                        smooth={true}
-                        offset={-70}
-                        duration={500}
+                        to={{
+                          pathname: link,
+                          state: { Object: link },
+                        }}
                       >
-                        {link}
-                      </Smooth>
+                        {link.Nombre}
+                      </Link>
                     </div>
                   ))}
                 </ul>

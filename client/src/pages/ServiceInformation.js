@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import Menu from "./../components/MenuAside";
+import Table from "./../components/TableArguments";
 
 import "./css/ServiceInformation.css";
 
@@ -14,7 +15,7 @@ const ServiceInformation = (props) => {
   }, [pathname]);
 
   let service = props.history.location.state.Object;
-  console.log(props.history.location.state);
+  //console.log(props.history.location.state);
   return (
     <div>
       <div className="container">
@@ -25,40 +26,7 @@ const ServiceInformation = (props) => {
           <h3 className="title-service">{service.Nombre}</h3>
           <p>{service.Descripcion}</p>
           <hr />
-          <div className="table">
-            <h3>Arguments</h3>
-            <table>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>Required</th>
-                <th>Default</th>
-              </tr>
-              <tr>
-                <td>Search</td>
-                <td>
-                  usable for text search on fields defined in "Properties"
-                  parameter; syntax; supports logic operators (AND,OR,NOT). eg:
-                  "arad AND arac OR "biosynthesis of macromolecules""
-                </td>
-                <td>String</td>
-                <td>Something</td>
-                <td>Something</td>
-              </tr>
-              <tr>
-                <td>advancedSearch</td>
-                <td>
-                  usable for queries that require advanced control, uses a
-                  "value[field]" syntax; supports logic operators (AND,OR,NOT).
-                  eg: "(arac|arad[geneInfo.name] AND reverse[geneInfo.strand])"
-                </td>
-                <td>String</td>
-                <td>Something</td>
-                <td>Something</td>
-              </tr>
-            </table>
-          </div>
+          <Table></Table>
           <h3>Query Example</h3>
           <div className="query-code"></div>
           <h3>Parameters</h3>

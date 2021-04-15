@@ -1,0 +1,10 @@
+{
+    getAllGenes: {
+        limit:{
+            description: lorem  lorem relomladsdld,
+            default: null
+            type: int
+        }
+    },
+
+}
