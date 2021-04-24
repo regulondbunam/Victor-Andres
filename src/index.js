@@ -1,24 +1,33 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./components/App";
-//import "font-awesome/css/font-awesome.min.css";
-
-import ApolloClient from "apollo-boost";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals"
+// librerias
+import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { ApolloProvider } from "@apollo/react-hooks";
+import Client from "./conf/apollo/apollo_client";
 
-const client = new ApolloClient({
-  uri: "http://localhost:4001/graphql",
-  fetchOptions: {
-    mode: "cors",
-  },
-});
+import "./regulonDB_global.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+const main = document.getElementById("root");
+const renderOrHydrate = main.innerHTML.trim().length ? "hydrate" : "render";
+
+ReactDOM[renderOrHydrate](
+  <StrictMode>
+    <BrowserRouter>
+      <HelmetProvider>
+        <ApolloProvider client={Client}>
+          <App />
+        </ApolloProvider>
+      </HelmetProvider>
+    </BrowserRouter>
+  </StrictMode>,
+  main
 );
+
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
