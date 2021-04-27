@@ -1,6 +1,6 @@
 import md2json from "md-2-json";
 
-export const FormatDataMenu = (data) => {
+export const FormatData = (data) => {
   let dataMenu = data.__type.fields;
 
   let dataWithOutMD = [];
@@ -11,23 +11,25 @@ export const FormatDataMenu = (data) => {
     dataWithOutMD.push(DataMDtoObj);
   }
 
-  let menuData = {};
+  let ServicesData = {};
   dataWithOutMD.forEach((x) => {
-    if (!menuData.hasOwnProperty(clean(x.Type.raw))) {
-      menuData[clean(x.Type.raw)] = {};
+    if (!ServicesData.hasOwnProperty(clean(x.Type.raw))) {
+      ServicesData[clean(x.Type.raw)] = {};
     }
 
-    if (!menuData[clean(x.Type.raw)].hasOwnProperty([clean(x.Service.raw)])) {
-      menuData[clean(x.Type.raw)][clean(x.Service.raw)] = [];
+    if (
+      !ServicesData[clean(x.Type.raw)].hasOwnProperty([clean(x.Service.raw)])
+    ) {
+      ServicesData[clean(x.Type.raw)][clean(x.Service.raw)] = [];
     }
 
-    menuData[clean(x.Type.raw)][clean(x.Service.raw)].push({
+    ServicesData[clean(x.Type.raw)][clean(x.Service.raw)].push({
       Nombre: clean(x.Name.raw),
       Descripcion: clean(x.Description.raw),
     });
   });
 
-  return menuData;
+  return ServicesData;
 };
 
 function clean(str) {
