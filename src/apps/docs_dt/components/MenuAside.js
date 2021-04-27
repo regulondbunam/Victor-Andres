@@ -4,16 +4,18 @@ import { Link } from "react-scroll";
 import { useQuery } from "@apollo/client";
 
 import { GetData } from "../../../web_services/docs_queries";
-import { FormatDataMenu } from "../../../web_services/structuringData";
+import { FormatData } from "../../../web_services/structuringData";
 
 import MenuCSS from "./css/MenuAside.module.css";
 
-const MenuAside = () => {
-  const { loading, error, data } = useQuery(GetData());
+const MenuAside = ({ category, service, link }) => {
+  const { loading, error, data } = useQuery(GetData(), {
+    variables: { category, service, link },
+  });
   if (loading) return <p>Cargando...</p>;
-  if (error) return <p>Error</p>;
+  if (error) return <p>Error...</p>;
 
-  const dataMenu = FormatDataMenu(data);
+  const dataMenu = FormatData(data);
 
   return (
     <div className={MenuCSS.sideMenu}>
