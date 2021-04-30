@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 import { GetData } from "../../../web_services/docs_queries";
-import { FormatData } from "../../../web_services/structuringData";
+import { FormatDataDesc } from "../../../web_services/structuringData";
 
 import ServDesc from "./css/ServDesc.module.css";
 //ServDescs
@@ -12,7 +12,7 @@ const ServiceInfo = () => {
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error</p>;
 
-  const DescServices = FormatData(data);
+  const DescServices = FormatDataDesc(data);
 
   return (
     <>

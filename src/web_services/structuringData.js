@@ -72,6 +72,40 @@ export const FormatData = (data) => {
   return (ServiceData = { menuElements });
 };
 
+export const FormatDataDesc = (data) => {
+  let dataMenu = data.__type.fields;
+
+  let dataWithOutMD = [];
+
+  for (let i = 0; i < dataMenu.length; i++) {
+    let descrip = dataMenu[i].description.replace(/#+/g, "#");
+    let DataMDtoObj = md2json.parse(descrip);
+    dataWithOutMD.push(DataMDtoObj);
+  }
+
+  let menuData = {};
+
+  dataWithOutMD.map((e) => {
+    const Type = clean(e.Type.raw);
+    const Service = clean(e.Service.raw);
+    const Name = clean(e.Name.raw);
+    if (!menuData.hasOwnProperty(Type)) {
+      menuData[Type] = {};
+    }
+
+    if (!menuData[Type].hasOwnProperty([Service])) {
+      menuData[Type][Service] = [];
+    }
+
+    menuData[Type][Service].push({
+      Nombre: Name,
+      Descripcion: clean(e.Description.raw),
+    });
+  });
+
+  return menuData;
+};
+
 function objExists(obj, array) {
   return array.some(function (objData) {
     return objData.title === obj.title;

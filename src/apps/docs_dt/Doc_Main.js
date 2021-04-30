@@ -4,7 +4,6 @@ import { Cover } from "../../ui-components/ui_components";
 //Components
 import MenuAside from "./components/MenuAside";
 import ServsDesc from "./components/ServDesc";
-import Menu from "./components/Menu";
 
 //Assets
 import DocCSS from "./Doc_Main.module.css";
@@ -17,13 +16,10 @@ const Documentation = () => {
       </Cover>
       <div className={DocCSS.container}>
         <div className={DocCSS.containerMenu}>
-          {/* <MenuAside></MenuAside> */}
+          <MenuAside></MenuAside>
         </div>
-        {/* <div className={DocCSS.containerServices}>
+        <div className={DocCSS.containerServices}>
           <ServsDesc></ServsDesc>
-        </div> */}
-        <div>
-          <Menu></Menu>
         </div>
       </div>
     </>
