@@ -8,15 +8,14 @@ import { FormatData } from "../../../web_services/structuringData";
 
 import MenuCSS from "./css/MenuAside.module.css";
 
-const MenuAside = ({ category, service, link }) => {
-  const { loading, error, data } = useQuery(GetData(), {
-    variables: { category, service, link },
-  });
+const MenuAside = () => {
+  const { loading, error, data } = useQuery(GetData());
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error...</p>;
 
   const dataMenu = FormatData(data);
 
+  //console.log(dataMenu);
   return (
     <div className={MenuCSS.sideMenu}>
       {Object.keys(dataMenu).map((category, i) => (
@@ -33,6 +32,7 @@ const MenuAside = ({ category, service, link }) => {
             >
               {category}
             </Link>
+            {/* <MenuAside nivel1={category}/> */}
             {Object.keys(dataMenu[category]).map((service, j) => (
               <div key={j}>
                 <ul className={MenuCSS.list}>
@@ -47,6 +47,7 @@ const MenuAside = ({ category, service, link }) => {
                   >
                     {service}
                   </Link>
+                  {/* <MenuAside nivel2={service} /> */}
                   {dataMenu[category][service].map((link, k) => (
                     <div key={i++} className={MenuCSS.containerLink}>
                       <NavLink
@@ -65,6 +66,7 @@ const MenuAside = ({ category, service, link }) => {
                       >
                         {link.Nombre}
                       </NavLink>
+                      {/* <MenuAside nivel3={link} /> */}
                     </div>
                   ))}
                 </ul>

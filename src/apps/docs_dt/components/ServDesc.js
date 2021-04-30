@@ -5,8 +5,8 @@ import { useQuery } from "@apollo/client";
 import { GetData } from "../../../web_services/docs_queries";
 import { FormatData } from "../../../web_services/structuringData";
 
-import SvcsDescr from "./css/SvcsDescr.module.css";
-
+import ServDesc from "./css/ServDesc.module.css";
+//ServDescs
 const ServiceInfo = () => {
   const { loading, error, data } = useQuery(GetData());
   if (loading) return <p>Cargando...</p>;
@@ -17,19 +17,19 @@ const ServiceInfo = () => {
   return (
     <>
       <div>
-        <h2 className={SvcsDescr.title}>RegulonDB GraphQL Web Services</h2>
+        <h2 className={ServDesc.title}>RegulonDB GraphQL Web Services</h2>
 
         {Object.keys(DescServices).map((category, i) => (
           <div key={i} id={category}>
-            <h3 className={SvcsDescr.categorys}>{category}</h3>
+            <h3 className={ServDesc.categorys}>{category}</h3>
             {Object.keys(DescServices[category]).map((service, j) => (
               <div
                 key={j}
-                className={SvcsDescr.containerServiceCategory}
+                className={ServDesc.containerServiceCategory}
                 id={service}
               >
-                <h4 className={SvcsDescr.serviceCategory}>{service}</h4>
-                <p className={SvcsDescr.descriptionServiceCategory}>
+                <h4 className={ServDesc.serviceCategory}>{service}</h4>
+                <p className={ServDesc.descriptionServiceCategory}>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Impedit numquam laboriosam soluta nulla vero quidem
                   consectetur accusamus recusandae. Similique perferendis,
@@ -39,7 +39,7 @@ const ServiceInfo = () => {
                 {DescServices[category][service].map((ObjectService, k) => (
                   <div
                     key={k}
-                    className={SvcsDescr.containerService}
+                    className={ServDesc.containerService}
                     id={ObjectService.Nombre}
                   >
                     <Link
@@ -47,16 +47,16 @@ const ServiceInfo = () => {
                         pathname: ObjectService.Nombre,
                         state: { Object: ObjectService },
                       }}
-                      className={SvcsDescr.service}
+                      className={ServDesc.service}
                     >
                       {ObjectService.Nombre}
                     </Link>
-                    <p className={SvcsDescr.DescriptionService}>
+                    <p className={ServDesc.DescriptionService}>
                       {ObjectService.Descripcion}
                     </p>
                   </div>
                 ))}
-                <hr className={SvcsDescr.line} />
+                <hr className={ServDesc.line} />
               </div>
             ))}
           </div>

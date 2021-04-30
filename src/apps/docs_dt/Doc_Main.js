@@ -2,8 +2,9 @@ import React from "react";
 import { Cover } from "../../ui-components/ui_components";
 
 //Components
-import Menu from "./components/MenuAside";
-import ServsDesc from "./components/SvcsDescr";
+import MenuAside from "./components/MenuAside";
+import ServsDesc from "./components/ServDesc";
+import Menu from "./components/Menu";
 
 //Assets
 import DocCSS from "./Doc_Main.module.css";
@@ -16,10 +17,13 @@ const Documentation = () => {
       </Cover>
       <div className={DocCSS.container}>
         <div className={DocCSS.containerMenu}>
-          <Menu></Menu>
+          {/* <MenuAside></MenuAside> */}
         </div>
-        <div className={DocCSS.containerServices}>
+        {/* <div className={DocCSS.containerServices}>
           <ServsDesc></ServsDesc>
+        </div> */}
+        <div>
+          <Menu></Menu>
         </div>
       </div>
     </>
