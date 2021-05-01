@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+
+import MenuCSS from "./css/Menu.module.css";
 
 const Menu = (dataMenu) => {
   return dataMenu.menuElements.map((e) => {
@@ -7,29 +9,32 @@ const Menu = (dataMenu) => {
 };
 
 const RecursiveComponent = ({ id, title, value, sons }) => {
+  const [isOpened, setIsOpened] = useState(false);
+
+  function toggle() {
+    setIsOpened((wasOpened) => !wasOpened);
+  }
   const handle = (value) => alert(value);
 
   const hasChildren = (children) => children && children.length;
 
   return (
-    <ul>
+    <ul className={MenuCSS.listElements}>
       <li key={id}>
-        <button
-          onClick={() => {
-            handle(value);
-          }}
-        >
+        <button className={MenuCSS.elements} onClick={toggle}>
           {title}
         </button>
       </li>
       {hasChildren(sons) &&
+        isOpened &&
         sons.map((item) => (
           <li key={item.id}>
             {hasChildren(item.sons) == null && (
-              <ol>
+              <ol className={MenuCSS.listElements}>
                 <button
+                  className={MenuCSS.link}
                   onClick={() => {
-                    handle(item.value);
+                    handle(value);
                   }}
                 >
                   {item.title}

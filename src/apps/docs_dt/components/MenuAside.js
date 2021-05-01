@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { GetData } from "../../../web_services/docs_queries";
 import { FormatData } from "../../../web_services/structuringData";
 import Menu from "./Menu";
+import MenuAside from "./css/MenuAside.module.css";
 
 export default function App() {
   const { loading, error, data } = useQuery(GetData());
@@ -12,7 +13,11 @@ export default function App() {
 
   const dataMenu = FormatData(data);
 
-  return <Menu {...dataMenu} />;
+  return (
+    <div className={MenuAside.sideMenu}>
+      <Menu {...dataMenu} />
+    </div>
+  );
 }
 
 /* Prueba para corroborar que sea dinamico
