@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import MenuCSS from "./css/Menu.module.css";
 
@@ -11,10 +12,15 @@ const Menu = (dataMenu) => {
 const RecursiveComponent = ({ id, title, value, sons }) => {
   const [isOpened, setIsOpened] = useState(false);
 
+  let history = useHistory();
+
+  function handleClick(value) {
+    history.push(`/${value}`);
+  }
+
   function toggle() {
     setIsOpened((wasOpened) => !wasOpened);
   }
-  const handle = (value) => alert(value);
 
   const hasChildren = (children) => children && children.length;
 
@@ -25,16 +31,16 @@ const RecursiveComponent = ({ id, title, value, sons }) => {
           {title}
         </button>
       </li>
+
       {hasChildren(sons) &&
-        isOpened &&
         sons.map((item) => (
           <li key={item.id}>
-            {hasChildren(item.sons) == null && (
+            {hasChildren(item.sons) == null && isOpened && (
               <ol className={MenuCSS.listElements}>
                 <button
                   className={MenuCSS.link}
                   onClick={() => {
-                    handle(value);
+                    handleClick(item.value);
                   }}
                 >
                   {item.title}

@@ -1,15 +1,15 @@
 import TestRenderer from "react-test-renderer";
 import { MockedProvider } from "@apollo/client/testing";
 
-import Menu from "./MenuAside";
-import { GetData } from "./../../../web_services/docs_queries";
+import ServDes from "../components/ServDesc";
+import { GetData } from "../../../web_services/docs_queries";
 
 const mocks = []; // We'll fill this in next
 
 it("renders without error", () => {
   const component = TestRenderer.create(
     <MockedProvider mocks={mocks} addTypename={false}>
-      <Menu category="Data" />
+      <ServDes category="Data" />
     </MockedProvider>
   );
 
@@ -28,7 +28,7 @@ it("should show error UI", async () => {
 
   const component = TestRenderer.create(
     <MockedProvider mocks={[Mock]} addTypename={false}>
-      <Menu service="data" />
+      <ServDes service="data" />
     </MockedProvider>
   );
 

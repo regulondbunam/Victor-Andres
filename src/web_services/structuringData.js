@@ -106,6 +106,30 @@ export const FormatDataDesc = (data) => {
   return menuData;
 };
 
+export const FormatDataTable = (data) => {
+  let args = data.__type.fields;
+
+  let ObjArguments = {};
+  for (let i = 0; i < args.length; i++) {
+    if (!ObjArguments.hasOwnProperty(args[i].name)) {
+      ObjArguments[args[i].name] = {};
+    }
+
+    for (let j = 0; j < args[i].args.length; j++) {
+      if (!ObjArguments[args[i].name].hasOwnProperty(args[i].args[j].name)) {
+        ObjArguments[args[i].name][args[i].args[j].name] = [];
+      }
+
+      ObjArguments[args[i].name][args[i].args[j].name].push({
+        Descripcion: args[i].args[j].description,
+        ValorPorDefault: args[i].args[j].defaultValue,
+        Tipo: args[i].args[j].type.name,
+      });
+    }
+  }
+  return ObjArguments;
+};
+
 function objExists(obj, array) {
   return array.some(function (objData) {
     return objData.title === obj.title;

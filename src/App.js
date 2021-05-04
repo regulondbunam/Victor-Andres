@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Layout from "./layout/layout";
 import Documentation from "./apps/docs_dt/Doc_Main";
-import MenuAside from "./apps/docs_dt/components/MenuAside";
 
 export default function App() {
   return (
