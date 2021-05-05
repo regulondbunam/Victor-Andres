@@ -17,9 +17,12 @@
 }
 
 .codeExample {
-  height: 300px;
+  height: 100px;
   background-color: #dce7ed;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  color: #32617d;
 }
 
 .tryContainer {

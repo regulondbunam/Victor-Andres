@@ -16,6 +16,7 @@ export const GetArguments = () => {
   return gql`
     {
       __type(name: "Query") {
+        name
         fields {
           name
           args {
@@ -24,6 +25,9 @@ export const GetArguments = () => {
             defaultValue
             type {
               name
+              ofType {
+                name
+              }
             }
           }
         }

@@ -15,8 +15,8 @@ export const FormatData = (data) => {
 
   let contador = 1;
   dataWithOutMD.map((e) => {
-    const Type = clean(e.Type.raw);
-    const Service = clean(e.Service.raw);
+    const Type = deleteBreakLines(e.Type.raw);
+    const Service = deleteBreakLines(e.Service.raw);
     let objCategory = {
       id: contador,
       title: Type,
@@ -31,8 +31,8 @@ export const FormatData = (data) => {
   // Segundo Nivel
   contador = 1;
   dataWithOutMD.map((e) => {
-    const Type = clean(e.Type.raw);
-    const Service = clean(e.Service.raw);
+    const Type = deleteBreakLines(e.Type.raw);
+    const Service = deleteBreakLines(e.Service.raw);
     let objService = {
       id: `${Service}_${contador}`,
       title: Service,
@@ -50,9 +50,9 @@ export const FormatData = (data) => {
   // Tercer Nivel
   contador = 1;
   dataWithOutMD.map((e) => {
-    const Type = clean(e.Type.raw);
-    const Service = clean(e.Service.raw);
-    const Name = clean(e.Name.raw);
+    const Type = deleteBreakLines(e.Type.raw);
+    const Service = deleteBreakLines(e.Service.raw);
+    const Name = deleteBreakLines(e.Name.raw);
 
     let objName = {
       id: `${Type}_${Service}_${contador}`,
@@ -86,9 +86,9 @@ export const FormatDataDesc = (data) => {
   let menuData = {};
 
   dataWithOutMD.map((e) => {
-    const Type = clean(e.Type.raw);
-    const Service = clean(e.Service.raw);
-    const Name = clean(e.Name.raw);
+    const Type = deleteBreakLines(e.Type.raw);
+    const Service = deleteBreakLines(e.Service.raw);
+    const Name = deleteBreakLines(e.Name.raw);
     if (!menuData.hasOwnProperty(Type)) {
       menuData[Type] = {};
     }
@@ -99,7 +99,7 @@ export const FormatDataDesc = (data) => {
 
     menuData[Type][Service].push({
       Nombre: Name,
-      Descripcion: clean(e.Description.raw),
+      Descripcion: deleteBreakLines(e.Description.raw),
     });
   });
 
@@ -123,11 +123,49 @@ export const FormatDataTable = (data) => {
       ObjArguments[args[i].name][args[i].args[j].name].push({
         Descripcion: args[i].args[j].description,
         ValorPorDefault: args[i].args[j].defaultValue,
-        Tipo: args[i].args[j].type.name,
+        /* Required: args[i].args[j].required, */
+        Tipo:
+          args[i].args[j].type.name == null
+            ? `[${args[i].args[j].type.ofType.name}]`
+            : args[i].args[j].type.name,
       });
     }
   }
   return ObjArguments;
+};
+
+export const FormatDataServDesc = (data) => {
+  let dataDesc = data.__type.fields;
+
+  let dataWithOutMD = [];
+
+  for (let i = 0; i < dataDesc.length; i++) {
+    let descrip = dataDesc[i].description.replace(/#+/g, "#");
+    let DataMDtoObj = md2json.parse(descrip);
+    dataWithOutMD.push(DataMDtoObj);
+  }
+
+  /* console.log(dataWithOutMD); */
+  let DescriptionServices = [];
+
+  dataWithOutMD.map((e) => {
+    const Type = deleteBreakLines(e.Type.raw);
+    const Service = deleteBreakLines(e.Service.raw);
+    const Name = deleteBreakLines(e.Name.raw);
+
+    DescriptionServices.push({
+      Nombre: Name,
+      Descripcion: deleteBreakLines(e.Description.raw),
+      Ejemplo: [
+        e.Example == undefined
+          ? "Not Example"
+          : deleteTemplateLiterals(e.Example["raw"]),
+        ,
+      ],
+    });
+  });
+
+  return DescriptionServices;
 };
 
 function objExists(obj, array) {
@@ -136,7 +174,12 @@ function objExists(obj, array) {
   });
 }
 
-function clean(str) {
-  var str2 = str.replace(/\n|\r/g, "");
+function deleteTemplateLiterals(str) {
+  let str2 = str.replace(/```json|```/g, "");
+  return str2;
+}
+
+function deleteBreakLines(str) {
+  let str2 = str.replace(/\n|\r/g, "");
   return str2;
 }

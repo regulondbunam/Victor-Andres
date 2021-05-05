@@ -12,9 +12,10 @@ const Table = (props) => {
   if (error) return <p>Error...</p>;
 
   const Args = FormatDataTable(data);
+  //console.log(Args);
   return (
     <div className={TableCSS.table}>
-      <h3>Arguments</h3>
+      <h3 className={TableCSS.title}>Arguments</h3>
       <table>
         <thead>
           <tr>
@@ -32,8 +33,12 @@ const Table = (props) => {
                 <td>{args}</td>
                 <td>{service.Descripcion}</td>
                 <td>{service.Tipo}</td>
-                <td></td>
-                <td>{service.ValorPorDefault}</td>
+                <td>Not required</td>
+                <td>
+                  {service.ValorPorDefault == null
+                    ? "Not defined"
+                    : service.ValorPorDefault}
+                </td>
               </tr>
             ))
           )}

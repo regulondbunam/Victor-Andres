@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 
+import { GetData } from "../../../web_services/docs_queries";
+import { FormatDataServDesc } from "../../../web_services/structuringData";
 import Table from "./Table";
+import Code from "./Code";
 
 import ServInfoCSS from "./css/ServInfo.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
 const ServInfo = () => {
   const { pathname } = useLocation();
@@ -13,30 +19,53 @@ const ServInfo = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  const { loading, error, data } = useQuery(GetData());
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>Error...</p>;
+
+  const DescService = FormatDataServDesc(data);
+
+  const description = DescService.filter((e) => {
+    if (e.Nombre == service) return e.Descripcion;
+  });
+
+  const parameters = [
+    {
+      Parametros: [
+        `{
+  "id":"string",
+  "name":"string"
+}`,
+      ],
+    },
+  ];
+
+  let url =
+    "http://132.248.220.201:4001/graphql?query=" +
+    encodeURI(description[0]["Ejemplo"]);
+  console.log(parameters[0]["Parametros"]);
   return (
     <div className={ServInfoCSS.serviceInfo}>
       <div className={ServInfoCSS.tryContainer}>
         <Link to="/" className={ServInfoCSS.tryLink}>
-          Regresar
+          <FontAwesomeIcon
+            icon={faChevronCircleLeft}
+            style={{ fontSize: "1rem" }}
+          />
         </Link>
       </div>
-      <h3 className={ServInfoCSS.titles}>getAllGenes</h3>
-      <p className={ServInfoCSS.description}>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur
-        mollitia quidem nemo! Temporibus labore, molestias eaque architecto
-        dolor nulla, facilis dicta sapiente a alias animi. Unde odit corrupti
-        amet laborum.
-      </p>
+      <h3 className={ServInfoCSS.titles}>{service}</h3>
+      <p className={ServInfoCSS.description}>{description[0]["Descripcion"]}</p>
       <hr className={ServInfoCSS.line} />
       <Table service={service} />
       <h3 className={ServInfoCSS.titles}>Query Example</h3>
-      <div className={ServInfoCSS.codeExample}></div>
+      <Code {...description[0]["Ejemplo"]} />
       <h3 className={ServInfoCSS.titles}>Parameters</h3>
-      <div className={ServInfoCSS.codeExample}></div>
+      <Code {...parameters[0]["Parametros"]} />
       <div className={ServInfoCSS.tryContainer}>
         <a
           rel="nofollow noopener noreferrer"
-          href="http://localhost:4001/graphql/?query=%7B%0A%20%20getAllGenes%7B%0A%20%20%20%20data%7B%0A%20%20%20%20%20%20gene%7B%0A%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20products%7B%0A%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D"
+          href={url}
           target="_blank"
           className={ServInfoCSS.tryLink}
         >
