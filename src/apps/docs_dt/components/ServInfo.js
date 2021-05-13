@@ -29,21 +29,10 @@ const ServInfo = () => {
     if (e.Nombre == service) return e.Descripcion;
   });
 
-  const parameters = [
-    {
-      Parametros: [
-        `{
-  "id":"string",
-  "name":"string"
-}`,
-      ],
-    },
-  ];
-
   let url =
     "http://132.248.220.201:4001/graphql?query=" +
     encodeURI(description[0]["Ejemplo"]);
-  console.log(parameters[0]["Parametros"]);
+
   return (
     <div className={ServInfoCSS.serviceInfo}>
       <div className={ServInfoCSS.tryContainer}>
@@ -60,8 +49,6 @@ const ServInfo = () => {
       <Table service={service} />
       <h3 className={ServInfoCSS.titles}>Query Example</h3>
       <Code {...description[0]["Ejemplo"]} />
-      <h3 className={ServInfoCSS.titles}>Parameters</h3>
-      <Code {...parameters[0]["Parametros"]} />
       <div className={ServInfoCSS.tryContainer}>
         <a
           rel="nofollow noopener noreferrer"
@@ -76,53 +63,22 @@ const ServInfo = () => {
       <h3 className={ServInfoCSS.titles}>Languages</h3>
       <div className={ServInfoCSS.buttons}>
         <div className={ServInfoCSS.languageSection}>
-          <a
-            rel="nofollow noopener noreferrer"
-            target="_blank"
-            className={ServInfoCSS.languages}
-          >
-            Example Output
-          </a>
+          <button className={ServInfoCSS.languages}>Example Output</button>
         </div>
         <div className={ServInfoCSS.languageSection}>
-          <a
-            rel="nofollow noopener noreferrer"
-            target="_blank"
-            className={ServInfoCSS.languages}
-          >
-            Node
-          </a>
+          <button className={ServInfoCSS.languages}>NodeJS</button>
         </div>
         <div className={ServInfoCSS.languageSection}>
-          <a
-            rel="nofollow noopener noreferrer"
-            target="_blank"
-            className={ServInfoCSS.languages}
-          >
-            Python 2
-          </a>
+          <button className={ServInfoCSS.languages}>Python 2</button>
         </div>
         <div className={ServInfoCSS.languageSection}>
-          <a
-            rel="nofollow noopener noreferrer"
-            target="_blank"
-            className={ServInfoCSS.languages}
-          >
-            Python 3
-          </a>
+          <button className={ServInfoCSS.languages}>Python 3</button>
         </div>
         <div className={ServInfoCSS.languageSection}>
-          <a
-            rel="nofollow noopener noreferrer"
-            target="_blank"
-            className={ServInfoCSS.languages}
-          >
-            R
-          </a>
+          <button className={ServInfoCSS.languages}>R</button>
         </div>
       </div>
 
-      <div className={ServInfoCSS.codeExample}></div>
       <hr className={ServInfoCSS.line} />
     </div>
   );
