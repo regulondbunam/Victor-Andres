@@ -6,6 +6,7 @@ import { GetData } from "../../../web_services/docs_queries";
 import { FormatDataServDesc } from "../../../web_services/structuringData";
 import Table from "./Table";
 import Code from "./Code";
+import Example from "./ExampleOutput";
 
 import ServInfoCSS from "./css/ServInfo.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -78,7 +79,7 @@ const ServInfo = () => {
           <button className={ServInfoCSS.languages}>R</button>
         </div>
       </div>
-
+      {<Example {...description[0]["Ejemplo"]} />}
       <hr className={ServInfoCSS.line} />
     </div>
   );
