@@ -10,7 +10,6 @@ export const FormatData = (data) => {
     let DataMDtoObj = md2json.parse(descrip);
     dataWithOutMD.push(DataMDtoObj);
   }
-
   let menuElements = [];
 
   let contador = 1;
@@ -114,21 +113,27 @@ export const FormatDataTable = (data) => {
     if (!ObjArguments.hasOwnProperty(args[i].name)) {
       ObjArguments[args[i].name] = {};
     }
-
     for (let j = 0; j < args[i].args.length; j++) {
       if (!ObjArguments[args[i].name].hasOwnProperty(args[i].args[j].name)) {
         ObjArguments[args[i].name][args[i].args[j].name] = [];
       }
+      let DataMDtoObj;
+      if (args[i].args[j].description != undefined) {
+        let descrip = args[i].args[j].description.replace(/#+/g, "#");
+        DataMDtoObj = md2json.parse(descrip);
+      }
 
-      ObjArguments[args[i].name][args[i].args[j].name].push({
-        Descripcion: args[i].args[j].description,
-        ValorPorDefault: args[i].args[j].defaultValue,
-        /* Required: args[i].args[j].required, */
-        Tipo:
-          args[i].args[j].type.name == null
-            ? `[${args[i].args[j].type.ofType.name}]`
-            : args[i].args[j].type.name,
-      });
+      if (DataMDtoObj != undefined) {
+        ObjArguments[args[i].name][args[i].args[j].name].push({
+          Descripcion: DataMDtoObj["Description"]["raw"],
+          ValorPorDefault: args[i].args[j].defaultValue,
+          Necesario: DataMDtoObj["Required"]["raw"],
+          Tipo:
+            args[i].args[j].type.name == null
+              ? `[${args[i].args[j].type.ofType.name}]`
+              : args[i].args[j].type.name,
+        });
+      }
     }
   }
   return ObjArguments;
@@ -145,7 +150,6 @@ export const FormatDataServDesc = (data) => {
     dataWithOutMD.push(DataMDtoObj);
   }
 
-  /* console.log(dataWithOutMD); */
   let DescriptionServices = [];
 
   dataWithOutMD.map((e) => {
@@ -160,7 +164,6 @@ export const FormatDataServDesc = (data) => {
         e.Example == undefined
           ? "Not Example"
           : deleteTemplateLiterals(e.Example["raw"]),
-        ,
       ],
     });
   });
@@ -180,6 +183,6 @@ function deleteTemplateLiterals(str) {
 }
 
 function deleteBreakLines(str) {
-  let str2 = str.replace(/\n|\r/g, "");
+  let str2 = str.replace(/\n|\r|^\s+/g, "");
   return str2;
 }
