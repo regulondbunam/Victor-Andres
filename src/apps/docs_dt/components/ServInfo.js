@@ -20,6 +20,8 @@ const buttonsTitles = [
   "R",
   "Java",
   "Ruby",
+  "Curl",
+  "Wget",
 ];
 
 const ServInfo = () => {
@@ -84,8 +86,38 @@ const ServInfo = () => {
         frameBorder="no"
       ></iframe>
     ),
-    5: <h2>Hola Java</h2>,
-    6: <h2>Hola Ruby</h2>,
+    5: (
+      <iframe
+        height="600px"
+        width="100%"
+        src="https://replit.com/@VictorAndaya1/ConnecRegulonDBJava?lite=true"
+        frameBorder="no"
+      ></iframe>
+    ),
+    6: (
+      <iframe
+        height="600px"
+        width="100%"
+        src="https://replit.com/@VictorAndaya1/ConnecRegulonDBRuby?lite=true"
+        frameBorder="no"
+      ></iframe>
+    ),
+    7: (
+      <iframe
+        height="600px"
+        width="100%"
+        src="https://replit.com/@VictorAndaya1/ConnectRegulonDBCurl?lite=true"
+        frameBorder="no"
+      ></iframe>
+    ),
+    8: (
+      <iframe
+        height="600px"
+        width="100%"
+        src="https://replit.com/@VictorAndaya1/ConnectRegulonDBWget?lite=true"
+        frameBorder="no"
+      ></iframe>
+    ),
   };
 
   return (
