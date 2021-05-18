@@ -1,8 +1,8 @@
-.containerMenu {
+/* .containerMenu {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-}
+} */
 .listElements {
   list-style-type: none;
   margin: 3% 0 3% 5%;

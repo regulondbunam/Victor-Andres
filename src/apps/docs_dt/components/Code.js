@@ -6,11 +6,6 @@ import CodeCSS from "./css/Code.module.css";
 const Code = (Code) => {
   const [copy, setCopy] = useState(false);
 
-  /* const copyCodeToClipboard = () => {
-    navigator.clipboard.writeText(Code[0]);
-    setCopy((copy) => true);
-  }; */
-
   return (
     <div className={CodeCSS.container}>
       <button
@@ -41,36 +36,5 @@ const Code = (Code) => {
     </div>
   );
 };
-
-/* const container = {
-  backgroundColor: "#dce7ed",
-  borderRadius: "5px",
-  color: "#32617d",
-};
-
-const containerCode = {
-  padding: "10px 0",
-  display: "flex",
-  alignItems: "center",
-};
-
-const code = {
-  display: "flex",
-  flexDirection: "column",
-  fontSize: "1.3rem",
-  paddingLeft: "10px",
-};
-
-const btnCopy = {
-  float: "right",
-  border: "2px solid #32617d",
-  background: "none",
-  fontSize: "1rem",
-  margin: "20px",
-  padding: "5px 10px",
-  borderRadius: "5px",
-  cursor: "pointer",
-  color: "#32617d",
-}; */
 
 export default Code;
