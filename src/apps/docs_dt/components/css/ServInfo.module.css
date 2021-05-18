@@ -60,7 +60,7 @@
   border-radius: 5px;
 }
 
-.languages:hover {
+.active {
   background-color: #32617d;
   color: #fff;
 }

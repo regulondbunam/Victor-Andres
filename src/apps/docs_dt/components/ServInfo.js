@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
@@ -12,6 +12,16 @@ import ServInfoCSS from "./css/ServInfo.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
+const buttonsTitles = [
+  "Example Output",
+  "NodeJS",
+  "Python 3",
+  "Python 2",
+  "R",
+  "Java",
+  "Ruby",
+];
+
 const ServInfo = () => {
   const { pathname } = useLocation();
   const service = pathname.substr(1);
@@ -19,6 +29,12 @@ const ServInfo = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  const [active, setActive] = useState(0);
+
+  const handleOnClick = (index) => {
+    setActive(index);
+  };
 
   const { loading, error, data } = useQuery(GetData());
   if (loading) return <p>Cargando...</p>;
@@ -33,6 +49,44 @@ const ServInfo = () => {
   let url =
     "http://132.248.220.201:4001/graphql?query=" +
     encodeURI(description[0]["Ejemplo"]);
+
+  const codeExample = {
+    0: <Example {...description[0]["Ejemplo"]} />,
+    1: (
+      <iframe
+        height="600px"
+        width="100%"
+        src="https://replit.com/@VictorAndaya1/ConnectionRegulonDB?lite=true"
+        frameBorder="no"
+      ></iframe>
+    ),
+    2: (
+      <iframe
+        height="600px"
+        width="100%"
+        src="https://replit.com/@VictorAndaya1/ConnectionRegulonDB-1?lite=true"
+        frameBorder="no"
+      ></iframe>
+    ),
+    3: (
+      <iframe
+        height="600px"
+        width="100%"
+        src="https://replit.com/@VictorAndaya1/ConnectionRegulonDBPython27?lite=true"
+        frameBorder="no"
+      ></iframe>
+    ),
+    4: (
+      <iframe
+        height="600px"
+        width="100%"
+        src="https://replit.com/@VictorAndaya1/ConnectionRegulonDBR?lite=true"
+        frameBorder="no"
+      ></iframe>
+    ),
+    5: <h2>Hola Java</h2>,
+    6: <h2>Hola Ruby</h2>,
+  };
 
   return (
     <div className={ServInfoCSS.serviceInfo}>
@@ -62,24 +116,22 @@ const ServInfo = () => {
       </div>
       <hr className={ServInfoCSS.line} />
       <h3 className={ServInfoCSS.titles}>Languages</h3>
+
       <div className={ServInfoCSS.buttons}>
-        <div className={ServInfoCSS.languageSection}>
-          <button className={ServInfoCSS.languages}>Example Output</button>
-        </div>
-        <div className={ServInfoCSS.languageSection}>
-          <button className={ServInfoCSS.languages}>NodeJS</button>
-        </div>
-        <div className={ServInfoCSS.languageSection}>
-          <button className={ServInfoCSS.languages}>Python 2</button>
-        </div>
-        <div className={ServInfoCSS.languageSection}>
-          <button className={ServInfoCSS.languages}>Python 3</button>
-        </div>
-        <div className={ServInfoCSS.languageSection}>
-          <button className={ServInfoCSS.languages}>R</button>
-        </div>
+        {buttonsTitles.map((type, index) => (
+          <div key={type + index} className={ServInfoCSS.languageSection}>
+            <button
+              className={`${ServInfoCSS.languages} ${
+                active === index && ServInfoCSS.active
+              }`}
+              onClick={() => handleOnClick(index)}
+            >
+              {type}
+            </button>
+          </div>
+        ))}
       </div>
-      {<Example {...description[0]["Ejemplo"]} />}
+      <div>{codeExample[active]}</div>
       <hr className={ServInfoCSS.line} />
     </div>
   );
