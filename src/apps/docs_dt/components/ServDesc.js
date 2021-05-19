@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 import { GetData } from "../../../web_services/docs_queries";
 import { FormatDataDesc } from "../../../web_services/structuringData";
+
+import TableServ from "../components/TableServ";
 
 import ServDescCSS from "./css/ServDesc.module.css";
 //ServDescs
@@ -28,39 +29,14 @@ const ServDescs = () => {
               id={service}
             >
               <h4 className={ServDescCSS.serviceCategory}>{service}</h4>
-              <p className={ServDescCSS.descriptionServiceCategory}></p>
-              {DescServices[category][service].map((ObjectService, k) => (
-                <div
-                  key={k}
-                  className={ServDescCSS.containerService}
-                  id={ObjectService.Nombre}
-                >
-                  <Link
-                    to={{
-                      pathname: ObjectService.Nombre,
-                      state: { Object: ObjectService },
-                    }}
-                    className={ServDescCSS.service}
-                  >
-                    {ObjectService.Nombre}
-                  </Link>
-                  <p className={ServDescCSS.DescriptionService}>
-                    {ObjectService.Descripcion}
-                  </p>
-                </div>
-              ))}
-              <hr className={ServDescCSS.line} />
+              <TableServ service={DescServices[category][service]} />
             </div>
           ))}
+          <br />
         </div>
       ))}
     </>
   );
 };
-
-function clean(str) {
-  var str2 = str.replace(/\n|\r/g, "");
-  return str2;
-}
 
 export default ServDescs;

@@ -35,19 +35,6 @@
   margin: 10px 40px 10px 10px;
 }
 
-.service {
-  padding: 10px 0;
-  color: #32617d;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.DescriptionService {
-  padding-top: 5px;
-  font-size: 1rem;
-}
-
 .line {
   border-top: 1px solid #e0e0e0;
-  margin-right: 5%;
 }
