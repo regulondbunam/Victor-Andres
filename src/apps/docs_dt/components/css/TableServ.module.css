@@ -13,15 +13,21 @@
   color: #32617d;
   font-size: 1rem;
   display: flex;
-  width: 100%;
   align-items: center;
 }
 
+.query {
+  width: 35%;
+}
+
+.description {
+  width: 65%;
+}
 .containerText {
   display: flex;
 }
 
-.table tr:nth-child(odd) {
+.table tbody tr:nth-child(odd) {
   background-color: #f1f1f1;
 }
 
@@ -31,9 +37,13 @@
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
+  width: 100%;
+  word-wrap: break-word;
 }
 
 .DescriptionService {
   padding-top: 5px;
   font-size: 1rem;
+  width: 100%;
+  word-wrap: break-word;
 }

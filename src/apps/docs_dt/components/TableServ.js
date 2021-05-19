@@ -2,21 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import TableCSS from "./css/TableServ.module.css";
-import Table from "./Table";
 
 const TableServ = (props) => {
-  console.log(props.service);
   return (
     <div className={TableCSS.container}>
       <table className={TableCSS.table}>
-        <thead className={TableCSS.containerText}>
-          <th className={TableCSS.text}>Query</th>
-          <th>Description</th>
+        <thead>
+          <tr className={TableCSS.containerText}>
+            <th className={TableCSS.query}>Query</th>
+            <th className={TableCSS.description}>Description</th>
+          </tr>
         </thead>
         <tbody>
           {props.service.map((ObjectService, k) => (
-            <tr className={TableCSS.containerText}>
-              <td className={TableCSS.text}>
+            <tr key={k} className={TableCSS.containerText}>
+              <td className={TableCSS.query}>
                 <Link
                   to={{
                     pathname: ObjectService.Nombre,
@@ -27,7 +27,7 @@ const TableServ = (props) => {
                   {ObjectService.Nombre}
                 </Link>
               </td>
-              <td>
+              <td className={TableCSS.description}>
                 <p className={TableCSS.DescriptionService}>
                   {ObjectService.Descripcion}
                 </p>
