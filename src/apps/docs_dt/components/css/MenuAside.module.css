@@ -1,8 +1,8 @@
-/* .sideMenu {
+.sideMenu {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-} */
+}
 .list {
   color: #32617d;
   list-style-type: none;

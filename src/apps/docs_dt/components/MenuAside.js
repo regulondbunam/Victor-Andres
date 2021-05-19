@@ -19,18 +19,3 @@ export default function App() {
     </div>
   );
 }
-
-/* Prueba para corroborar que sea dinamico
-"""
-  #### Type
-  Set
-  #### Service
-  Example
-  #### Name
-  getExample
-  #### Description
-  Example
-  """
-  getExample: [overviewInfoType]
-
-*/

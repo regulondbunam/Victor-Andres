@@ -128,6 +128,7 @@ const ServInfo = () => {
             icon={faChevronCircleLeft}
             style={{ fontSize: "1rem" }}
           />
+          &nbsp;Back
         </Link>
       </div>
       <h3 className={ServInfoCSS.titles}>{service}</h3>
