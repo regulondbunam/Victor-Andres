@@ -3,6 +3,9 @@ import ReactTooltip from "react-tooltip";
 
 import CodeCSS from "./css/Code.module.css";
 
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { a11yLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
+
 const Code = (Code) => {
   const [copy, setCopy] = useState(false);
 
@@ -26,17 +29,22 @@ const Code = (Code) => {
           {!copy ? "Copy to clipboard" : "Copied!"}
         </ReactTooltip>
       </div>
-      <pre className={CodeCSS.containerCode}>
-        <code className={CodeCSS.code}>
-          <ol className={CodeCSS.list}>
-            {Code[0].split("\n").map((e, i) => (
-              <li key={i}>
-                <span className={CodeCSS.span}>{e}</span>
-              </li>
-            ))}
-          </ol>
-        </code>
-      </pre>
+      <SyntaxHighlighter
+        lineProps={{ style: { paddingBottom: 8 } }}
+        wrapLines={true}
+        showLineNumbers={true}
+        language={Code[1]}
+        customStyle={{
+          overflow: "auto",
+          maxHeight: "500px",
+          background: "#dce7ed",
+          fontSize: ".9rem",
+          borderRadius: "5px",
+        }}
+        style={a11yLight}
+      >
+        {Code[0]}
+      </SyntaxHighlighter>
     </div>
   );
 };
