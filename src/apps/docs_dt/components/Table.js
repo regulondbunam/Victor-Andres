@@ -19,11 +19,13 @@ const Table = (props) => {
       {Object.keys(Args[props.service]).length != 0 ? (
         <table>
           <thead>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>Required</th>
-            <th>Default</th>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th>Required</th>
+              <th>Default</th>
+            </tr>
           </thead>
           <tbody>
             {Object.keys(Args[props.service]).map((args) =>

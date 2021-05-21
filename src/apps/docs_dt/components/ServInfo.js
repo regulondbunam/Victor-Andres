@@ -7,6 +7,16 @@ import { FormatDataServDesc } from "../../../web_services/structuringData";
 import Table from "./Table";
 import Code from "./Code";
 import Example from "./ExampleOutput";
+import {
+  Node,
+  Python2,
+  Python3,
+  R,
+  Java,
+  Ruby,
+  Curl,
+  Wget,
+} from "./ExampleLanguages";
 
 import ServInfoCSS from "./css/ServInfo.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,8 +25,8 @@ import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 const buttonsTitles = [
   "Example Output",
   "NodeJS",
-  "Python 3",
   "Python 2",
+  "Python 3",
   "R",
   "Java",
   "Ruby",
@@ -42,82 +52,26 @@ const ServInfo = () => {
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error...</p>;
 
-  const DescService = FormatDataServDesc(data);
+  const DescServices = FormatDataServDesc(data);
 
-  const description = DescService.filter((e) => {
+  const description = DescServices.filter((e) => {
     if (e.Nombre == service) return e.Descripcion;
   });
 
   let url =
-    "http://132.248.220.201:4001/graphql?query=" +
+    "http://localhost:4001/graphql?query=" +
     encodeURI(description[0]["Ejemplo"]);
 
   const codeExample = {
     0: <Example {...description[0]["Ejemplo"]} />,
-    1: (
-      <iframe
-        height="600px"
-        width="100%"
-        src="https://replit.com/@VictorAndaya1/ConnectionRegulonDB?lite=true"
-        frameBorder="no"
-      ></iframe>
-    ),
-    2: (
-      <iframe
-        height="600px"
-        width="100%"
-        src="https://replit.com/@VictorAndaya1/ConnectionRegulonDB-1?lite=true"
-        frameBorder="no"
-      ></iframe>
-    ),
-    3: (
-      <iframe
-        height="600px"
-        width="100%"
-        src="https://replit.com/@VictorAndaya1/ConnectionRegulonDBPython27?lite=true"
-        frameBorder="no"
-      ></iframe>
-    ),
-    4: (
-      <iframe
-        height="600px"
-        width="100%"
-        src="https://replit.com/@VictorAndaya1/ConnectionRegulonDBR?lite=true"
-        frameBorder="no"
-      ></iframe>
-    ),
-    5: (
-      <iframe
-        height="600px"
-        width="100%"
-        src="https://replit.com/@VictorAndaya1/ConnecRegulonDBJava?lite=true"
-        frameBorder="no"
-      ></iframe>
-    ),
-    6: (
-      <iframe
-        height="600px"
-        width="100%"
-        src="https://replit.com/@VictorAndaya1/ConnecRegulonDBRuby?lite=true"
-        frameBorder="no"
-      ></iframe>
-    ),
-    7: (
-      <iframe
-        height="600px"
-        width="100%"
-        src="https://replit.com/@VictorAndaya1/ConnectRegulonDBCurl?lite=true"
-        frameBorder="no"
-      ></iframe>
-    ),
-    8: (
-      <iframe
-        height="600px"
-        width="100%"
-        src="https://replit.com/@VictorAndaya1/ConnectRegulonDBWget?lite=true"
-        frameBorder="no"
-      ></iframe>
-    ),
+    1: <Code {...Node(description[0]["Ejemplo"])} />,
+    2: <Code {...Python2(description[0]["Ejemplo"])} />,
+    3: <Code {...Python3(description[0]["Ejemplo"])} />,
+    4: <Code {...R(description[0]["Ejemplo"])} />,
+    5: <Code {...Java(description[0]["Ejemplo"])} />,
+    6: <Code {...Ruby(description[0]["Ejemplo"])} />,
+    7: <Code {...Curl(description[0]["Ejemplo"])} />,
+    8: <Code {...Wget(url)} />,
   };
 
   return (

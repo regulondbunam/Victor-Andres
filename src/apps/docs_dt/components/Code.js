@@ -8,29 +8,33 @@ const Code = (Code) => {
 
   return (
     <div className={CodeCSS.container}>
-      <button
-        className={CodeCSS.btnCopy}
-        onClick={() => navigator.clipboard.writeText(Code[0])}
-        data-tip
-        data-for="copyTip"
-      >
-        Copy
-      </button>
-      <ReactTooltip
-        id="copyTip"
-        place="top"
-        effect="solid"
-        backgroundColor="#32617d"
-      >
-        {!copy ? "Copy to clipboard" : "Copied!"}
-      </ReactTooltip>
+      <div className={CodeCSS.buttonContainer}>
+        <button
+          className={CodeCSS.btnCopy}
+          onClick={() => navigator.clipboard.writeText(Code[0])}
+          data-tip
+          data-for="copyTip"
+        >
+          Copy
+        </button>
+        <ReactTooltip
+          id="copyTip"
+          place="top"
+          effect="solid"
+          backgroundColor="#32617d"
+        >
+          {!copy ? "Copy to clipboard" : "Copied!"}
+        </ReactTooltip>
+      </div>
       <pre className={CodeCSS.containerCode}>
         <code className={CodeCSS.code}>
-          {Code[0].split("\n").map((e, i) => (
-            <span className={CodeCSS.span} key={i}>
-              {e}
-            </span>
-          ))}
+          <ol className={CodeCSS.list}>
+            {Code[0].split("\n").map((e, i) => (
+              <li key={i}>
+                <span className={CodeCSS.span}>{e}</span>
+              </li>
+            ))}
+          </ol>
         </code>
       </pre>
     </div>
