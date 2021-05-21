@@ -28,6 +28,7 @@ async function getData() {
     
     getData();//example
     `,
+    "javascript",
   ];
 };
 
@@ -46,6 +47,7 @@ def main():
 if __name__ == '__main__':
     main()
     `,
+    "python",
   ];
 };
 
@@ -65,6 +67,7 @@ if r.status_code == 200:
 else:
     raise Exception(f"Query failed to run with a {r.status_code}.")
     `,
+    "python",
   ];
 };
 
@@ -82,6 +85,7 @@ qry$query('dc', '${exampleQuery}')
 res <- con$exec(qry$queries$dc)
 head(jsonlite::fromJSON(res)$data$publications$nodes)
     `,
+    "R",
   ];
 };
 
@@ -144,6 +148,7 @@ class Main {
     }
 }
     `,
+    "java",
   ];
 };
 
@@ -169,6 +174,7 @@ res = Net::HTTP.start(uri.host, uri.port) do |http|
 end
 puts(res.body)
     `,
+    "ruby",
   ];
 };
 
@@ -182,6 +188,7 @@ curl 'http://132.248.220.201:4001/graphql' \
   "query": "${exampleQuery}"
   }'
     `,
+    "bash",
   ];
 };
 
@@ -189,7 +196,9 @@ export const Wget = (exampleQuery) => {
   return [
     `
     
-wget -q --header='Content-type:application/json' '${exampleQuery}'  -O -
+wget -q --header='Content-type:application/json' 
+'${exampleQuery}'  -O -
     `,
+    "bash",
   ];
 };
