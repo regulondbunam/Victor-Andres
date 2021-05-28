@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-
+//Components
 import { GetData } from "../../../web_services/docs_queries";
 import { FormatDataServDesc } from "../../../web_services/structuringData";
 import Table from "./Table";
@@ -17,30 +17,21 @@ import {
   Curl,
   Wget,
 } from "./ExampleLanguages";
-
+//Assets
 import ServInfoCSS from "./css/ServInfo.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
 
-const buttonsTitles = [
-  "Example Output",
-  "NodeJS",
-  "Python 2",
-  "Python 3",
-  "R",
-  "Java",
-  "Ruby",
-  "Curl",
-  "Wget",
-];
-
-const ServInfo = () => {
+const ServInfo = (conf) => {
   const { pathname } = useLocation();
   const service = pathname.substr(1);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  const buttons = conf.buttons;
+  const titles = conf.titles;
 
   const [active, setActive] = useState(0);
 
@@ -59,7 +50,7 @@ const ServInfo = () => {
   });
 
   let url =
-    "http://localhost:4001/graphql?query=" +
+    "http://132.248.220.201:4001/graphql?query=" +
     encodeURI(description[0]["Ejemplo"]);
 
   const codeExample = {
@@ -82,15 +73,16 @@ const ServInfo = () => {
             icon={faChevronCircleLeft}
             style={{ fontSize: "1rem" }}
           />
-          &nbsp;Back
+          &nbsp;{buttons.back_button.title}
         </Link>
       </div>
       <h3 className={ServInfoCSS.titles}>{service}</h3>
       <p className={ServInfoCSS.description}>{description[0]["Descripcion"]}</p>
       <hr className={ServInfoCSS.line} />
+      <h3 className={ServInfoCSS.titles}>{titles.args.title}</h3>
       <Table service={service} />
-      <h3 className={ServInfoCSS.titles}>Query Example</h3>
-      <Code {...description[0]["Ejemplo"]} />
+      <h3 className={ServInfoCSS.titles}>{titles.query_example.title}</h3>
+      <Code {...[description[0]["Ejemplo"], "graphql"]} />
       <div className={ServInfoCSS.tryContainer}>
         <a
           rel="nofollow noopener noreferrer"
@@ -98,22 +90,22 @@ const ServInfo = () => {
           target="_blank"
           className={ServInfoCSS.tryLink}
         >
-          Try it now
+          {buttons.try_it_now_button.title}
         </a>
       </div>
       <hr className={ServInfoCSS.line} />
-      <h3 className={ServInfoCSS.titles}>Languages</h3>
+      <h3 className={ServInfoCSS.titles}>{titles.languages.title}</h3>
 
       <div className={ServInfoCSS.buttons}>
-        {buttonsTitles.map((type, index) => (
-          <div key={type + index} className={ServInfoCSS.languageSection}>
+        {buttons.language_buttons.map((button, index) => (
+          <div key={button.id} className={ServInfoCSS.languageSection}>
             <button
               className={`${ServInfoCSS.languages} ${
                 active === index && ServInfoCSS.active
               }`}
               onClick={() => handleOnClick(index)}
             >
-              {type}
+              {button.title}
             </button>
           </div>
         ))}

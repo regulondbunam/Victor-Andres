@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import ReactTooltip from "react-tooltip";
 import { useQuery, gql } from "@apollo/client";
-
+//Assets
 import ExampleCSS from "./css/Example.module.css";
+import conf from "./../conf/view_main.conf.json";
 
 const ExampleOutput = (Code) => {
   const [copy, setCopy] = useState(false);
@@ -25,7 +26,7 @@ const ExampleOutput = (Code) => {
         data-tip
         data-for="copyTip"
       >
-        Copy
+        {conf.code.copy_button.title}
       </button>
       <ReactTooltip
         id="copyTip"

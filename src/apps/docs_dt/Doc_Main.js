@@ -9,6 +9,7 @@ import ServInfo from "./components/ServInfo";
 
 //Assets
 import DocCSS from "./Doc_Main.module.css";
+import conf from "./conf/view_main.conf.json";
 
 const Documentation = () => {
   let history = useHistory();
@@ -24,7 +25,11 @@ const Documentation = () => {
           <MenuAside></MenuAside>
         </div>
         <div className={DocCSS.containerServices}>
-          {url == "/" ? <ServsDesc /> : <ServInfo />}
+          {url == "/" ? (
+            <ServsDesc {...conf.serv_desc.title_main} />
+          ) : (
+            <ServInfo {...conf.serv_info} />
+          )}
         </div>
       </div>
     </>

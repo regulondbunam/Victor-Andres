@@ -1,10 +1,11 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-
+//Components
 import { GetArguments } from "../../../web_services/docs_queries";
 import { FormatDataTable } from "../../../web_services/structuringData";
-
+//Assets
 import TableCSS from "./css/Table.module.css";
+import conf from "./../conf/view_main.conf.json";
 
 const Table = (props) => {
   const { loading, error, data } = useQuery(GetArguments());
@@ -15,16 +16,16 @@ const Table = (props) => {
 
   return (
     <div className={TableCSS.table}>
-      <h3 className={TableCSS.title}>Arguments</h3>
+      {/* <h3 className={TableCSS.title}>Arguments</h3> */}
       {Object.keys(Args[props.service]).length != 0 ? (
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Type</th>
-              <th>Required</th>
-              <th>Default</th>
+              <th>{conf.table.table_head.head_1.title}</th>
+              <th>{conf.table.table_head.head_2.title}</th>
+              <th>{conf.table.table_head.head_3.title}</th>
+              <th>{conf.table.table_head.head_4.title}</th>
+              <th>{conf.table.table_head.head_5.title}</th>
             </tr>
           </thead>
           <tbody>
@@ -46,7 +47,9 @@ const Table = (props) => {
           </tbody>
         </table>
       ) : (
-        <h4 className={TableCSS.text}>This service has no arguments</h4>
+        <h4 className={TableCSS.text}>
+          {conf.table.table_empty.message.title}
+        </h4>
       )}
     </div>
   );

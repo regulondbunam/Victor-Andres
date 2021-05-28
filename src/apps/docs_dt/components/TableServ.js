@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+//Assets
 import TableCSS from "./css/TableServ.module.css";
+import conf from "./../conf/view_main.conf.json";
 
 const TableServ = (props) => {
   return (
@@ -9,8 +10,12 @@ const TableServ = (props) => {
       <table className={TableCSS.table}>
         <thead>
           <tr className={TableCSS.containerText}>
-            <th className={TableCSS.query}>Query</th>
-            <th className={TableCSS.description}>Description</th>
+            <th className={TableCSS.query}>
+              {conf.table_serv.table_head.head_1.title}
+            </th>
+            <th className={TableCSS.description}>
+              {conf.table_serv.table_head.head_2.title}
+            </th>
           </tr>
         </thead>
         <tbody>

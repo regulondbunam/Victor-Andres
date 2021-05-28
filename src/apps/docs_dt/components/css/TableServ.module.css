@@ -41,6 +41,10 @@
   word-wrap: break-word;
 }
 
+.service:hover {
+  text-decoration: underline;
+}
+
 .DescriptionService {
   padding-top: 5px;
   font-size: 1rem;

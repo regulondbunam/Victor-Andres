@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ReactTooltip from "react-tooltip";
-
-import CodeCSS from "./css/Code.module.css";
-
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { a11yLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
+
+//Assets
+import CodeCSS from "./css/Code.module.css";
+import { xcode } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import conf from "./../conf/view_main.conf.json";
 
 const Code = (Code) => {
   const [copy, setCopy] = useState(false);
-
   return (
     <div className={CodeCSS.container}>
       <div className={CodeCSS.buttonContainer}>
@@ -18,7 +18,7 @@ const Code = (Code) => {
           data-tip
           data-for="copyTip"
         >
-          Copy
+          {conf.code.copy_button.title}
         </button>
         <ReactTooltip
           id="copyTip"
@@ -40,8 +40,9 @@ const Code = (Code) => {
           background: "#dce7ed",
           fontSize: ".9rem",
           borderRadius: "5px",
+          color: "#32617d",
         }}
-        style={a11yLight}
+        style={xcode}
       >
         {Code[0]}
       </SyntaxHighlighter>

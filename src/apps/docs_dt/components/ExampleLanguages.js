@@ -85,7 +85,7 @@ qry$query('dc', '${exampleQuery}')
 res <- con$exec(qry$queries$dc)
 head(jsonlite::fromJSON(res)$data$publications$nodes)
     `,
-    "R",
+    "r",
   ];
 };
 

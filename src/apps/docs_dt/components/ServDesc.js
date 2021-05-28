@@ -1,14 +1,13 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-
+//Components
 import { GetData } from "../../../web_services/docs_queries";
 import { FormatDataDesc } from "../../../web_services/structuringData";
-
 import TableServ from "../components/TableServ";
-
+//Assets
 import ServDescCSS from "./css/ServDesc.module.css";
-//ServDescs
-const ServDescs = () => {
+
+const ServDescs = ({ id, name, title, disabled }) => {
   const { loading, error, data } = useQuery(GetData());
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error...</p>;
@@ -17,7 +16,7 @@ const ServDescs = () => {
 
   return (
     <>
-      <h2 className={ServDescCSS.title}>RegulonDB GraphQL Web Services</h2>
+      <h2 className={ServDescCSS.title}>{title}</h2>
 
       {Object.keys(DescServices).map((category, i) => (
         <div key={i} id={category}>
