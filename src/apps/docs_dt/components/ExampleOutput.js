@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactTooltip from "react-tooltip";
 import { useQuery, gql } from "@apollo/client";
 //Assets
@@ -6,8 +6,6 @@ import ExampleCSS from "./css/Example.module.css";
 import conf from "./../conf/view_main.conf.json";
 
 const ExampleOutput = (Code) => {
-  const [copy, setCopy] = useState(false);
-
   const query = gql`
     ${Code[0].toString()}
   `;
@@ -30,11 +28,11 @@ const ExampleOutput = (Code) => {
       </button>
       <ReactTooltip
         id="copyTip"
-        place="top"
+        place="left"
         effect="solid"
         backgroundColor="#32617d"
       >
-        {!copy ? "Copy to clipboard" : "Copied!"}
+        {conf.code.copy_hover_text.title}
       </ReactTooltip>
       <pre className={ExampleCSS.containerCode}>
         <code className={ExampleCSS.code}>

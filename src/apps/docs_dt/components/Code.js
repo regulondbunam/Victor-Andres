@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactTooltip from "react-tooltip";
 import SyntaxHighlighter from "react-syntax-highlighter";
 
@@ -8,7 +8,6 @@ import { xcode } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import conf from "./../conf/view_main.conf.json";
 
 const Code = (Code) => {
-  const [copy, setCopy] = useState(false);
   return (
     <div className={CodeCSS.container}>
       <div className={CodeCSS.buttonContainer}>
@@ -22,11 +21,11 @@ const Code = (Code) => {
         </button>
         <ReactTooltip
           id="copyTip"
-          place="top"
+          place="left"
           effect="solid"
           backgroundColor="#32617d"
         >
-          {!copy ? "Copy to clipboard" : "Copied!"}
+          {conf.code.copy_hover_text.title}
         </ReactTooltip>
       </div>
       <SyntaxHighlighter

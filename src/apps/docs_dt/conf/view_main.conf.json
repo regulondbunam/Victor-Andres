@@ -111,6 +111,12 @@
       "name": "copy",
       "title": "Copy",
       "disabled": false
+    },
+    "copy_hover_text": {
+      "id": "copy_hover_text",
+      "name": "copy_hover",
+      "title": "Copy to clipboard",
+      "disabled": false
     }
   },
   "table_serv": {
