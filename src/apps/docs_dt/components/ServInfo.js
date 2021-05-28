@@ -45,9 +45,9 @@ const ServInfo = (conf) => {
 
   const DescServices = FormatDataServDesc(data);
 
-  const description = DescServices.filter((e) => {
-    if (e.Nombre == service) return e.Descripcion;
-  });
+  const description = DescServices.filter(
+    (e) => e.Nombre === service && e.Descripcion
+  );
 
   let url =
     "http://132.248.220.201:4001/graphql?query=" +

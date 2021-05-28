@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactTooltip from "react-tooltip";
 import SyntaxHighlighter from "react-syntax-highlighter";
 

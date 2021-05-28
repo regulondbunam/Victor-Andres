@@ -16,7 +16,7 @@
   font-size: 1rem;
 }
 
-.table tr:nth-child(odd) {
+.table tbody tr:nth-child(odd) {
   background-color: #f1f1f1;
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Cover } from "../../ui-components/ui_components";
 import { useHistory } from "react-router-dom";
 
@@ -25,7 +25,7 @@ const Documentation = () => {
           <MenuAside></MenuAside>
         </div>
         <div className={DocCSS.containerServices}>
-          {url == "/" ? (
+          {url === "/" ? (
             <ServsDesc {...conf.serv_desc.title_main} />
           ) : (
             <ServInfo {...conf.serv_info} />

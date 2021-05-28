@@ -17,7 +17,7 @@ const Table = (props) => {
   return (
     <div className={TableCSS.table}>
       {/* <h3 className={TableCSS.title}>Arguments</h3> */}
-      {Object.keys(Args[props.service]).length != 0 ? (
+      {Object.keys(Args[props.service]).length !== 0 ? (
         <table>
           <thead>
             <tr>

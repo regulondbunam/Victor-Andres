@@ -13,9 +13,9 @@ export const FormatData = (data) => {
   let menuElements = [];
 
   let contador = 1;
-  dataWithOutMD.map((e) => {
+  dataWithOutMD.forEach((e) => {
     const Type = deleteBreakLines(e.Type.raw);
-    const Service = deleteBreakLines(e.Service.raw);
+    //const Service = deleteBreakLines(e.Service.raw);
     let objCategory = {
       id: contador,
       title: Type,
@@ -29,7 +29,7 @@ export const FormatData = (data) => {
   });
   // Segundo Nivel
   contador = 1;
-  dataWithOutMD.map((e) => {
+  dataWithOutMD.forEach((e) => {
     const Type = deleteBreakLines(e.Type.raw);
     const Service = deleteBreakLines(e.Service.raw);
     let objService = {
@@ -48,7 +48,7 @@ export const FormatData = (data) => {
 
   // Tercer Nivel
   contador = 1;
-  dataWithOutMD.map((e) => {
+  dataWithOutMD.forEach((e) => {
     const Type = deleteBreakLines(e.Type.raw);
     const Service = deleteBreakLines(e.Service.raw);
     const Name = deleteBreakLines(e.Name.raw);
@@ -67,8 +67,8 @@ export const FormatData = (data) => {
     }
   });
 
-  let ServiceData;
-  return (ServiceData = { menuElements });
+  const ServiceData = { menuElements };
+  return ServiceData;
 };
 
 export const FormatDataDesc = (data) => {
@@ -84,7 +84,7 @@ export const FormatDataDesc = (data) => {
 
   let menuData = {};
 
-  dataWithOutMD.map((e) => {
+  dataWithOutMD.forEach((e) => {
     const Type = deleteBreakLines(e.Type.raw);
     const Service = deleteBreakLines(e.Service.raw);
     const Name = deleteBreakLines(e.Name.raw);
@@ -118,12 +118,12 @@ export const FormatDataTable = (data) => {
         ObjArguments[args[i].name][args[i].args[j].name] = [];
       }
       let DataMDtoObj;
-      if (args[i].args[j].description != undefined) {
+      if (args[i].args[j].description !== undefined) {
         let descrip = args[i].args[j].description.replace(/#+/g, "#");
         DataMDtoObj = md2json.parse(descrip);
       }
 
-      if (DataMDtoObj != undefined) {
+      if (DataMDtoObj !== undefined) {
         ObjArguments[args[i].name][args[i].args[j].name].push({
           Descripcion: DataMDtoObj["Description"]["raw"],
           ValorPorDefault: args[i].args[j].defaultValue,
@@ -152,16 +152,16 @@ export const FormatDataServDesc = (data) => {
 
   let DescriptionServices = [];
 
-  dataWithOutMD.map((e) => {
-    const Type = deleteBreakLines(e.Type.raw);
-    const Service = deleteBreakLines(e.Service.raw);
+  dataWithOutMD.forEach((e) => {
+    //const Type = deleteBreakLines(e.Type.raw);
+    //const Service = deleteBreakLines(e.Service.raw);
     const Name = deleteBreakLines(e.Name.raw);
 
     DescriptionServices.push({
       Nombre: Name,
       Descripcion: deleteBreakLines(e.Description.raw),
       Ejemplo: [
-        e.Example == undefined
+        e.Example === undefined
           ? "Not Example"
           : deleteTemplateLiterals(e.Example["raw"]),
       ],
