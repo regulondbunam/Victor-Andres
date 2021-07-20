@@ -15,7 +15,6 @@ export const FormatData = (data) => {
   let contador = 1;
   dataWithOutMD.forEach((e) => {
     const Type = deleteBreakLines(e.Type.raw);
-    //const Service = deleteBreakLines(e.Service.raw);
     let objCategory = {
       id: contador,
       title: Type,
@@ -153,8 +152,6 @@ export const FormatDataServDesc = (data) => {
   let DescriptionServices = [];
 
   dataWithOutMD.forEach((e) => {
-    //const Type = deleteBreakLines(e.Type.raw);
-    //const Service = deleteBreakLines(e.Service.raw);
     const Name = deleteBreakLines(e.Name.raw);
 
     DescriptionServices.push({

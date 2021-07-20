@@ -75,12 +75,6 @@
           "name": "example_wget",
           "title": "Wget",
           "disable": false
-        },
-        {
-          "id": "button_pearl",
-          "name": "example_pearl",
-          "title": "Pearl",
-          "disable": false
         }
       ]
     },

@@ -22,7 +22,10 @@ const TableServ = (props) => {
           {props.service.map((ObjectService, k) => (
             <tr key={k} className={TableCSS.containerText}>
               <td className={TableCSS.query}>
-                <Link
+                <a href={ObjectService.Nombre} className={TableCSS.service}>
+                  {ObjectService.Nombre}
+                </a>
+                {/* <Link
                   to={{
                     pathname: ObjectService.Nombre,
                     state: { Object: ObjectService },
@@ -30,7 +33,7 @@ const TableServ = (props) => {
                   className={TableCSS.service}
                 >
                   {ObjectService.Nombre}
-                </Link>
+                </Link> */}
               </td>
               <td className={TableCSS.description}>
                 <p className={TableCSS.DescriptionService}>

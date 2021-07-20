@@ -20,7 +20,7 @@ const ExampleOutput = (Code) => {
     <div className={ExampleCSS.container}>
       <button
         className={ExampleCSS.btnCopy}
-        onClick={() => navigator.clipboard.writeText(Code[0])}
+        onClick={() => navigator.clipboard.writeText(codeResult[0])}
         data-tip
         data-for="copyTip"
       >

@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 //Components
 import { GetData } from "../../../web_services/docs_queries";
 import { FormatDataServDesc } from "../../../web_services/structuringData";
-import Table from "./Table";
+import Table from "./TableArgs";
 import Code from "./Code";
 import Example from "./ExampleOutput";
 import {

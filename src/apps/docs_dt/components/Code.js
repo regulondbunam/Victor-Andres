@@ -4,7 +4,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 
 //Assets
 import CodeCSS from "./css/Code.module.css";
-import { xcode } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { xcode } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import conf from "./../conf/view_main.conf.json";
 
 const Code = (Code) => {

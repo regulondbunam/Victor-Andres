@@ -5,7 +5,7 @@ import { GetArguments } from "../../../web_services/docs_queries";
 import { FormatDataTable } from "../../../web_services/structuringData";
 //Assets
 import TableCSS from "./css/Table.module.css";
-import conf from "./../conf/view_main.conf.json";
+import conf from "../conf/view_main.conf.json";
 
 const Table = (props) => {
   const { loading, error, data } = useQuery(GetArguments());
@@ -16,7 +16,6 @@ const Table = (props) => {
 
   return (
     <div className={TableCSS.table}>
-      {/* <h3 className={TableCSS.title}>Arguments</h3> */}
       {Object.keys(Args[props.service]).length !== 0 ? (
         <table>
           <thead>

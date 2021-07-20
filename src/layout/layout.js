@@ -15,7 +15,7 @@ const Layout = ({ location, children }) => {
       <Menu />
       <section>
         <div style={{ float: "left", width: "100%" }}>{children}</div>
-        {/* {!isHome ? <Aside /> : null} */}
+        {!isHome ? <Aside /> : null}
       </section>
       <footer>
         <Footer urlPage={urlPage} />
